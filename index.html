@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Мария & Алексей · Свадьба</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* ===== ZERO СЕКЦИЯ — ТОЛЬКО ИНТРИГА ===== */
+    .zero-section {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      background: url('8.jpg') 40% center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 20px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      cursor: pointer;
+    }
+
+    .zero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 16, 14, 0.5);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 0;
+    }
+
+    .zero-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(40, 30, 24, 0.2) 0%, rgba(20, 16, 14, 0.1) 100%);
+      z-index: 0;
+    }
+
+    .zero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* заголовок с интригой */
+    .zero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
+      color: #f5eee7;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      letter-spacing: 4px;
+      line-height: 1.2;
+      opacity: 0.9;
+    }
+
+    .zero-title i {
+      color: #dcc4aa;
+      font-size: 0.9em;
+      margin: 0 8px;
+    }
+
+    .zero-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(220, 196, 170, 0.4), transparent);
+      margin: 0 auto;
+    }
+
+    .zero-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      border: 1px solid rgba(220, 196, 170, 0.25);
+      border-radius: 60px;
+      color: #f5eee7;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      background: rgba(30, 24, 20, 0.15);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, transform 0.3s;
+      letter-spacing: 1.5px;
+      font-weight: 300;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .zero-hint i {
+      color: #dcc4aa;
+      font-size: 1.2em;
+      animation: pulse-arrow 2s infinite;
+    }
+
+    @keyframes pulse-arrow {
+      0%, 100% { transform: translateX(0); opacity: 0.8; }
+      50% { transform: translateX(6px); opacity: 1; }
+    }
+
+    .zero-hint:active {
+      transform: scale(0.96);
+      background: rgba(30, 24, 20, 0.3);
+    }
+
+    .zero-hint .hint-text {
+      opacity: 0.8;
+      letter-spacing: 2px;
+    }
+
+    /* ===== ОСНОВНОЙ САЙТ ===== */
+    .main-section {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      background: url('8.jpg') 40% center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px 16px;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+
+    .main-section.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .main-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 24, 20, 0.35);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      z-index: 0;
+    }
+
+    .main-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(60, 45, 35, 0.15) 0%, rgba(30, 24, 20, 0.1) 100%);
+      z-index: 0;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      height: 100%;
+      max-height: 700px;
+    }
+
+    .main-content .names {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 13vw, 4.4rem);
+      letter-spacing: 1px;
+      line-height: 1.1;
+      color: #f5eee7;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2px;
+    }
+
+    .main-content .names .and {
+      color: #dcc4aa;
+      font-size: 0.8em;
+      margin: 0 6px;
+      font-weight: 300;
+    }
+
+    .invite-text {
+      font-size: clamp(1.05rem, 4vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      margin: 4px 0 10px;
+      padding: 0 10px;
+      color: #f5eee7;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+      line-height: 1.4;
+      max-width: 400px;
+    }
+
+    .invite-text i {
+      color: #dcc4aa;
+      margin: 0 4px;
+    }
+
+    .place-time {
+      background: rgba(30, 24, 20, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(220, 196, 170, 0.15);
+      border-radius: 24px;
+      padding: 18px 22px 20px;
+      width: 100%;
+      max-width: 380px;
+      margin: 4px 0 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .place-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      font-weight: 400;
+      color: #f5eee7;
+      margin-bottom: 4px;
+    }
+
+    .place-row i {
+      color: #dcc4aa;
+      font-size: 1.1em;
+      width: 1.4em;
+    }
+
+    .place-row .label {
+      font-weight: 300;
+      opacity: 0.7;
+      font-size: 0.85em;
+      margin-right: 2px;
+    }
+
+    .place-detail {
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .time-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      color: #f5eee7;
+      margin-top: 2px;
+    }
+
+    .time-row i {
+      color: #dcc4aa;
+      font-size: 1em;
+      width: 1.4em;
+    }
+
+    .time-row .label {
+      font-weight: 300;
+      opacity: 0.6;
+      font-size: 0.85em;
+      margin-right: 2px;
+    }
+
+    .time-value {
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .divider-line {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(220, 196, 170, 0.3), transparent);
+      margin: 8px auto 6px;
+    }
+
+    .btn-map {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(145deg, #dcc4aa, #c4a88e);
+      border: none;
+      border-radius: 60px;
+      padding: 16px 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 3.8vw, 1.4rem);
+      font-weight: 500;
+      color: #1f1814;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease, box-shadow 0.2s;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .btn-map:active {
+      transform: scale(0.96);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-map i {
+      font-size: 1em;
+      color: #2d231e;
+    }
+
+    .footer-note {
+      font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+      font-weight: 300;
+      opacity: 0.8;
+      letter-spacing: 1px;
+      margin-top: 10px;
+      color: #f5eee7;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(220, 196, 170, 0.12);
+      padding-top: 12px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .footer-note i {
+      color: #dcc4aa;
+      margin: 0 4px;
+    }
+
+    @media (max-height: 640px) {
+      .main-content {
+        gap: 4px;
+        max-height: 100%;
+      }
+      .place-time {
+        padding: 12px 16px 14px;
+      }
+      .btn-map {
+        padding: 12px 28px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .place-row,
+      .time-row {
+        font-size: 0.95rem;
+      }
+      .place-time {
+        padding: 10px 12px 12px;
+      }
+      .btn-map {
+        padding: 10px 22px;
+        font-size: 1rem;
+      }
+      .zero-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    .main-content>* {
+      flex-shrink: 0;
+    }
+
+    .heart-pulse {
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .zero-section.hidden {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <!-- ZERO СЕКЦИЯ — только интрига, без имён -->
+    <div class="zero-section" id="zeroSection">
+      <div class="zero-content">
+        <div class="zero-title">
+          <i class="fas fa-heart"></i>
+          <span>Wedding</span>
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="zero-divider"></div>
+        <div class="zero-hint" id="tapHint">
+          <span class="hint-text">Нажмите, чтобы узнать</span>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ОСНОВНОЙ САЙТ -->
+    <div class="main-section" id="mainSection">
+      <div class="main-content">
+
+        <h1 class="names">
+          Мария <span class="and">&</span> Алексей
+        </h1>
+
+        <p class="invite-text">
+          <i class="fas fa-heart heart-pulse"></i>
+          Приглашаем вас разделить с нами
+          <i class="fas fa-heart heart-pulse"></i>
+          <br>начало нашей вечной истории
+        </p>
+
+        <div class="place-time">
+          <div class="place-row">
+            <i class="fas fa-location-dot"></i>
+            <span class="label">Место:</span>
+            <span class="place-detail">Ресторан «Времена года»</span>
+          </div>
+          <div class="place-row" style="font-size: 0.85em; opacity: 0.7; margin-top: -2px;">
+            <span style="width: 1.4em; display: inline-block;"></span>
+            <span style="font-weight: 300;">наб. Фонтанки, 24</span>
+          </div>
+
+          <div class="divider-line"></div>
+
+          <div class="time-row">
+            <i class="far fa-clock"></i>
+            <span class="label">Сбор гостей:</span>
+            <span class="time-value">15:00</span>
+          </div>
+          <div class="time-row" style="font-size: 0.9em; opacity: 0.7; margin-top: -2px;">
+            <span style="width: 1.4em; display: inline-block;"></span>
+            <span>церемония в 15:30</span>
+          </div>
+        </div>
+
+        <a href="#" class="btn-map" id="mapBtn">
+          <i class="fas fa-map-pin"></i>
+          <span>Перейти на карту</span>
+          <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
+        </a>
+
+        <div class="footer-note">
+          <i class="fas fa-calendar-day"></i> 15 сентября 2024 <i class="fas fa-rings" style="margin-left: 6px;"></i>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      const zeroSection = document.getElementById('zeroSection');
+      const mainSection = document.getElementById('mainSection');
+      const mapBtn = document.getElementById('mapBtn');
+
+      function openMain() {
+        if (zeroSection.classList.contains('hidden')) return;
+        zeroSection.classList.add('hidden');
+        mainSection.classList.add('active');
+        if (navigator.vibrate) navigator.vibrate(30);
+      }
+
+      // Клик по zero-секции
+      zeroSection.addEventListener('click', openMain);
+      zeroSection.addEventListener('touchend', function(e) {
+        if (!this.classList.contains('hidden')) {
+          e.preventDefault();
+          openMain();
+        }
+      });
+
+      // Кнопка карты — заглушка
+      if (mapBtn) {
+        mapBtn.addEventListener('click', function(e) {
+          if (this.getAttribute('href') === '#') {
+            e.preventDefault();
+            if (navigator.vibrate) navigator.vibrate(20);
+            const original = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Открываем...</span>';
+            this.style.background = '#c4a88e';
+            setTimeout(() => {
+              this.innerHTML = original;
+              this.style.background = '';
+            }, 1000);
+          }
+        });
+      }
+
+      // Блокировка скролла
+      document.addEventListener('touchmove', function(e) {
+        if (e.target.closest('.app')) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      document.addEventListener('wheel', function(e) {
+        if (e.target.closest('.app')) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      // Адаптивная высота
+      function setHeight() {
+        const vh = window.innerHeight;
+        const app = document.querySelector('.app');
+        if (app) {
+          app.style.height = vh + 'px';
+          app.style.maxHeight = vh + 'px';
+        }
+      }
+      setHeight();
+      window.addEventListener('resize', setHeight);
+      window.addEventListener('orientationchange', function() {
+        setTimeout(setHeight, 200);
+      });
+
+    })();
+  </script>
+</body>
+</html>
