@@ -413,6 +413,9 @@
       pointer-events: none;
     }
 
+
+
+
 /* Увеличенная дата в hero-секции */
 .footer-note .date-highlight {
   font-size: clamp(1.2rem, 5vw, 1.8rem);
@@ -421,7 +424,32 @@
   color: #f5eee7;
   display: inline-block;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}/* Увеличение текста места и времени */
+.place-time .place-row,
+.place-time .time-row {
+  font-size: clamp(1.2rem, 4.5vw, 1.7rem);
 }
+
+.place-time .place-row .label,
+.place-time .time-row .label {
+  font-size: 1em; /* чтобы лейблы не отставали */
+}
+
+.place-time .place-row .place-detail,
+.place-time .time-row .time-value {
+  font-size: 1.05em;
+  font-weight: 500;
+}
+
+/* Адрес и время церемонии (вторые строки) */
+.place-time .place-row[style*="font-size: 0.85em"],
+.place-time .time-row[style*="font-size: 0.9em"] {
+  font-size: 1.05rem !important;
+  opacity: 0.8 !important;
+}
+
+
+
 
   </style>
 </head>
