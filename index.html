@@ -412,6 +412,17 @@
       transform: scale(1.05);
       pointer-events: none;
     }
+
+/* Увеличенная дата в hero-секции */
+.footer-note .date-highlight {
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #f5eee7;
+  display: inline-block;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
   </style>
 </head>
 <body>
@@ -478,9 +489,11 @@
           <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
         </a>
 
-        <div class="footer-note">
-          <i class="fas fa-calendar-day"></i> 15 сентября 2024 <i class="fas fa-rings" style="margin-left: 6px;"></i>
-        </div>
+<div class="footer-note">
+  <i class="fas fa-calendar-day"></i> 
+  <span class="date-highlight">15 сентября 2024</span> 
+  <i class="fas fa-rings" style="margin-left: 6px;"></i>
+</div>
 
       </div>
     </div>
